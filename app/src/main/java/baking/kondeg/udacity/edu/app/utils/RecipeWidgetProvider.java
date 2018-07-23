@@ -25,15 +25,14 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
-        Intent appIntent = new Intent(context, DetailActivity.class);
-        appIntent.addCategory(Intent.ACTION_MAIN);
-        appIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        appIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setPendingIntentTemplate(R.id.widget_view, appPendingIntent);
+       // Intent appIntent = new Intent(context, RecipeWidgetItemViewService.class);
+       // appIntent.addCategory(Intent.ACTION_MAIN);
+       // appIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+       //// appIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //views.setPendingIntentTemplate(R.id.widget_view, appPendingIntent);
         Intent intent = new Intent(context, RecipeWidgetItemViewService.class);
         Bundle b = new Bundle();
         b.putParcelableArrayList(context.getResources().getString(R.string.ingredients),ingredients);

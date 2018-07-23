@@ -48,14 +48,14 @@ public class RemoteWidgetItemViewFactory implements RemoteViewsService.RemoteVie
 
     @Override
     public RemoteViews getViewAt(int position) {
-        Log.d(LOG_TAG, "Ingredients widget "+ingredients.get(position).getIngredientString());
+        Log.d(LOG_TAG, "Ingredients widget "+position+" "+ingredients.get(position).getIngredientString());
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget_list);
 
         views.setTextViewText(R.id.widget_grid_item, ingredients.get(position).getIngredientString());
 
-        Intent fillInIntent = new Intent();
+        //Intent fillInIntent = new Intent();
         //fillInIntent.putExtras(extras);
-        views.setOnClickFillInIntent(R.id.widget_grid_item, fillInIntent);
+        //views.setOnClickFillInIntent(R.id.widget_grid_item, fillInIntent);
 
         return views;
     }
@@ -67,7 +67,7 @@ public class RemoteWidgetItemViewFactory implements RemoteViewsService.RemoteVie
 
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 1;
     }
 
     @Override
