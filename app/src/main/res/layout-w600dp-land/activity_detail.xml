@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/detail_coordinator_layout"
+    android:tag="tablet"
+    android:orientation="vertical"
+    tools:context=".activities.DetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside">
+            <include layout="@layout/content_detail" />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment_container2"
+            android:scaleType="centerInside"
+            android:layout_margin="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="25dp" >
+            <include layout="@layout/content_detail_steps" />
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

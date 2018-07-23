@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">baking-app</string>
+    <string name="app_name">Baking Application</string>
+    <string name="recipe">Recipe</string>
+    <string name="containerId">containerId</string>
+    <string name="ingredients">ingredients</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="recipe_no_data">No Recipe Data Found</string>
+    <string name="view_recipe">View</string>
+    <string name="recipe_beginning">Recipe for </string>
+    <string name="recipe_end"> servings of </string>
+    <string name="subtitle_ingredients">Ingredients:</string>
+    <string name="subtitle_steps">Preparation Steps:</string>
+    <string name="steps_no_data">No preparation steps found</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_step">You are viewing first step</string>
+    <string name="last_step">You are viewing last step</string>
+    <string name="stepFragment">stepFragment</string>
+    <string name="stepDetailFragment">stepDetailFragment</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
