@@ -6,4 +6,6 @@ public class EndpointValues {
     public static final String selectedRecipe="selectedRecipe";
     public static final String recipeList="recipeList";
     public static final String itemClicked="itemClicked";
+    public static final String playerPosition="playerPosition";
+    public static final String playeWhenReady="playeWhenReady";
 }

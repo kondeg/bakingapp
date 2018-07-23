@@ -1,6 +1,7 @@
 package baking.kondeg.udacity.edu.app.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -37,10 +38,12 @@ public class DetailActivity extends AppCompatActivity implements DetailRecyclerV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        setToolbarListener(toolbar);
 
         if (savedInstanceState == null) {
             selectedRecipe = getIntent().getExtras().getParcelable(EndpointValues.selectedRecipe);
@@ -73,6 +76,26 @@ public class DetailActivity extends AppCompatActivity implements DetailRecyclerV
                 getSupportFragmentManager().beginTransaction().replace(containerId, stepFragment).commit();
             }
         }
+    }
+
+    private void setToolbarListener(Toolbar toolbar) {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(LOG_TAG, "toolbarClickListener");
+                if (findViewById(R.id.prep_step_layout) != null) {
+                    Log.d(LOG_TAG, "toolbarClickListenerPrepStep");
+                    Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                    intent.putExtra(EndpointValues.selectedRecipe, selectedRecipe);
+                    v.getContext().startActivity(intent);
+                } else {
+                    Log.d(LOG_TAG, "toolbarClickListenerDetail");
+                    Intent intent = new Intent(v.getContext(), MainActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+            }
+        });
+
     }
 
     @Override

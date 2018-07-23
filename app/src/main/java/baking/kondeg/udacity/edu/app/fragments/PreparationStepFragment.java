@@ -66,6 +66,8 @@ public class PreparationStepFragment extends Fragment {
     private Integer clickedIndex;
     private PlayerView playerView;
     private SimpleExoPlayer player;
+    private long currentPosition = 0;
+    private boolean playWhenReady = true;
     Uri mediaUri;
 
     public PreparationStepFragment() {
@@ -111,13 +113,17 @@ public class PreparationStepFragment extends Fragment {
         if(savedInstanceState != null) {
             selectedRecipe = savedInstanceState.getParcelable(EndpointValues.selectedRecipe);
             clickedIndex = savedInstanceState.getInt(EndpointValues.itemClicked);
-        } else {
-            selectedRecipe = getArguments().getParcelable(EndpointValues.selectedRecipe);
-            clickedIndex = getArguments().getInt(EndpointValues.itemClicked);
+            currentPosition = savedInstanceState.getLong(EndpointValues.playerPosition);
+            playWhenReady = savedInstanceState.getBoolean(EndpointValues.playeWhenReady);
 
             Log.d(LOG_TAG," restoreInstanceState");
             Log.d(LOG_TAG, selectedRecipe.getInstructions().get(clickedIndex).getDescription());
             Log.d(LOG_TAG, clickedIndex.toString());
+            Log.d(LOG_TAG, Long.toString(currentPosition));
+        } else {
+            selectedRecipe = getArguments().getParcelable(EndpointValues.selectedRecipe);
+            clickedIndex = getArguments().getInt(EndpointValues.itemClicked);
+
         }
 
         View view = inflater.inflate(R.layout.fragment_preparation_step, container, false);
@@ -207,11 +213,16 @@ public class PreparationStepFragment extends Fragment {
 
             playerView.setPlayer(player);
 
-            player.setPlayWhenReady(true);
+            player.setPlayWhenReady(playWhenReady);
             MediaSource mediaSource = new ExtractorMediaSource.Factory(
                     new DefaultHttpDataSourceFactory(getResources().getString(R.string.app_name))).
                     createMediaSource(mediaUri);
-            player.prepare(mediaSource, true, false);
+            if (currentPosition>0) {
+                player.prepare(mediaSource);
+                player.seekTo(currentPosition);
+            } else {
+                player.prepare(mediaSource, true, false);
+            }
         }
     }
 
@@ -220,6 +231,10 @@ public class PreparationStepFragment extends Fragment {
         Log.d(LOG_TAG,"onSaveInstanceStateFragment");
         currentState.putParcelable(EndpointValues.selectedRecipe,selectedRecipe);
         currentState.putInt(EndpointValues.itemClicked,clickedIndex);
+        if (player!=null && player.getCurrentPosition()>0) {
+            currentState.putLong(EndpointValues.playerPosition,player.getCurrentPosition());
+            currentState.putBoolean(EndpointValues.playeWhenReady,player.getPlayWhenReady());
+        }
         super.onSaveInstanceState(currentState);
 
     }
