@@ -53,10 +53,6 @@ public class RemoteWidgetItemViewFactory implements RemoteViewsService.RemoteVie
 
         views.setTextViewText(R.id.widget_grid_item, ingredients.get(position).getIngredientString());
 
-        //Intent fillInIntent = new Intent();
-        //fillInIntent.putExtras(extras);
-        //views.setOnClickFillInIntent(R.id.widget_grid_item, fillInIntent);
-
         return views;
     }
 
